@@ -17,14 +17,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CodebustersAppWMU2
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class MainPage : Page
     {
+        private List<Task> _tasks = new List<Task>();
         public MainPage()
         {
             this.InitializeComponent();
+
+            _tasks.Add(new Task { TaskName = "Create The UWP app", Responsible = "Elvir Dzeko"});
+            _tasks.Add(new Task { TaskName = "Do something else"});
+            _tasks.Add(new Task { TaskName = "Design the Background", Responsible = "Elvir Dzeko"});
+            _tasks.Add(new Task { TaskName= "Fix the website", Responsible = "Elvir Dzeko"});
+
+            Tasklist.ItemsSource = _tasks;
         }
     }
 }
