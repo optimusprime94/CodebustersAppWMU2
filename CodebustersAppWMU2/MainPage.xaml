@@ -22,8 +22,11 @@
                        FontWeight="SemiBold"
                        Foreground="White">
             </TextBlock>
-
-            <ListView x:Name="Tasklist">
+            <!--Makes the item clickable-->
+            <ListView x:Name="Tasklist"
+                      IsItemClickEnabled="True"
+                      ItemClick="Tasklist_ItemClick">
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">

@@ -33,6 +33,7 @@ namespace CodebustersAppWMU2
              Test();
             
         }
+
         public async void Test(){
 
             HttpClient client = TaskManagerHttpClient.GetClient();
@@ -48,6 +49,7 @@ namespace CodebustersAppWMU2
                 {
                     //Tasklist.ItemsSource = listTask;
                     Tasklist.Items.Add(item);
+                    Tasklist.ItemClick += Tasklist_ItemClick;
                 }
             }
 
@@ -55,5 +57,11 @@ namespace CodebustersAppWMU2
            
         }
 
+        private void Tasklist_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            TaskDto item = (TaskDto)e.ClickedItem;
+            this.Frame.Navigate(typeof(Details), item);
+
+        }
     }
 }
