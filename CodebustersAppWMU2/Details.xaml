@@ -8,13 +8,18 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Source="Assets/bgimage1.jpg" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
         <TextBlock x:Name="TaskDetail" 
-                   HorizontalAlignment="Left" 
-                   Margin="10,46,0,0" 
+                   HorizontalAlignment="Center" 
+                   Margin="10,46,10,0" 
                    TextWrapping="Wrap" 
-                   Text="HELLO SUCKERS = NICK" 
+                   Text="Task" 
                    VerticalAlignment="Top" 
-                   Height="40" Width="340"/>
+                   Height="49" Width="340" FontSize="36" Foreground="#FFD53939" FontWeight="Bold"/>
+        <TextBlock x:Name="Description" HorizontalAlignment="Left" Margin="10,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="205" Width="340" Foreground="White" FontSize="22"/>
+        <TextBlock x:Name="Startdate" HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.425,-1.567" Width="170" Foreground="White" FontSize="22"/>
+        <TextBlock x:Name="Deadline" HorizontalAlignment="Left" Margin="180,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Foreground="White" FontSize="22" TextAlignment="Right"/>
 
     </Grid>
 </Page>

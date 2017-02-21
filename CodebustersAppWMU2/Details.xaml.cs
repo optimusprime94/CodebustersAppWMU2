@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CodebustersAppWMU2.Models;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace CodebustersAppWMU2
 {
     /// <summary>
@@ -30,13 +28,16 @@ namespace CodebustersAppWMU2
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Content is TaskDto)
+            /* We pass the task we clicked on to this action, then we check if the
+             * the parameter passed is null, if not we pass the values to the UI. */
+            if (e.Parameter != null)
             {
-                TaskDetail.Text = e.Parameter.ToString();
-            }
-            else
-            {
+                TaskDto task = (TaskDto)e.Parameter;
 
+                TaskDetail.Text = task.Title;
+                Description.Text = task.Requirements;
+                Startdate.Text = task.BeginDateTime;
+                Deadline.Text = task.DeadlineDateTime;
             }
             base.OnNavigatedTo(e);
         }

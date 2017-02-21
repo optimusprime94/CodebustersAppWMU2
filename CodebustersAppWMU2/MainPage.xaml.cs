@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Navigation;
 using CodebustersAppWMU2.Models;
 using Newtonsoft.Json;
 using System.Collections;
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace CodebustersAppWMU2
 {
@@ -41,15 +40,19 @@ namespace CodebustersAppWMU2
             HttpResponseMessage response = await client.GetAsync("api/tasks");
 
             if (response.IsSuccessStatusCode)
-            {
-                
+            {              
                 string content = await response.Content.ReadAsStringAsync();
                 var listTask = JsonConvert.DeserializeObject < IEnumerable <TaskDto>>(content);
                 foreach (var item in listTask)
                 {
-                    //Tasklist.ItemsSource = listTask;
-                    Tasklist.Items.Add(item);
-                    Tasklist.ItemClick += Tasklist_ItemClick;
+                    if (item != null)
+                    {
+                        Tasklist.Items.Add(item);
+                        
+
+
+                        Tasklist.ItemClick += Tasklist_ItemClick;
+                    }
                 }
             }
 
@@ -59,6 +62,7 @@ namespace CodebustersAppWMU2
 
         private void Tasklist_ItemClick(object sender, ItemClickEventArgs e)
         {
+            /* We pass the values from the clicked task to the next page */
             TaskDto item = (TaskDto)e.ClickedItem;
             this.Frame.Navigate(typeof(Details), item);
 
