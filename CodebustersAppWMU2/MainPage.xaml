@@ -27,12 +27,12 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding TaskName}" 
+                            <TextBlock Text="{Binding Title}" 
                            Margin="20,0,20,8"
                            FontSize="24" 
                            FontWeight="SemiBold"
                            Foreground="White" />
-                            <TextBlock Text="{Binding Responsible}" 
+                            <TextBlock Text="{Binding Requirements}" 
                            Margin="20,0,20,8"
                            FontSize="16"
                            Foreground="DarkGray" 

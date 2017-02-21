@@ -95,11 +95,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\TaskManagerHttpClient.cs" />
+    <Compile Include="Models\AssignmentDto.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Task.cs" />
+    <Compile Include="Models\TaskCreationDto.cs" />
+    <Compile Include="Models\TaskDto.cs" />
+    <Compile Include="Models\UserCreationDto.cs" />
+    <Compile Include="Models\UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

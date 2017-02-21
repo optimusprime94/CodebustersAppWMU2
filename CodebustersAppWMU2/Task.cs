@@ -24,8 +24,9 @@
              * no responsible user or if somebody else is.
              */
             get { return _responsible; }
-            set
+            
             {
+                
                     _responsible = value;
 
                 
