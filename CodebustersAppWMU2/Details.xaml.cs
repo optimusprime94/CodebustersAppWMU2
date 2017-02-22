@@ -36,10 +36,22 @@ namespace CodebustersAppWMU2
 
                 TaskDetail.Text = task.Title;
                 Description.Text = task.Requirements;
-                Startdate.Text = task.BeginDateTime;
-                Deadline.Text = task.DeadlineDateTime;
+                Startdate.Text = task.BeginDateTime.Substring(0,10);
+                Deadline.Text = task.DeadlineDateTime.Substring(0, 10);
             }
             base.OnNavigatedTo(e);
         }
+
+
+        //void HardwareButtons_BackPressed(object sender,
+        //  Windows.Phone.UI.Input.BackPressedEventArgs e)
+        //{
+        //    if (this.Frame != null && this.Frame.CanGoBack)
+        //    {
+        //        e.Handled = true;
+        //        this.Frame.GoBack();
+        //    }
+        //}
+
     }
 }

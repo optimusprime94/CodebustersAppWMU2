@@ -7,11 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="Assets/bgimage1.jpg" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/bgimage1.jpg"
+                    Stretch="UniformToFill" />
+        </Grid.Background>
         <TextBlock x:Name="TaskDetail" 
-                   HorizontalAlignment="Center" 
+                   HorizontalAlignment="Left" 
                    Margin="10,46,10,0" 
                    TextWrapping="Wrap" 
                    Text="Task" 

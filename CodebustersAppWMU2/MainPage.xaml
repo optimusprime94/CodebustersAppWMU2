@@ -8,9 +8,11 @@
     mc:Ignorable="d">
 
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="Assets/bgimage1.jpg" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/bgimage1.jpg"
+                    Stretch="UniformToFill" />
+        </Grid.Background>
         <!--surround the textblock and the listview in a 
         stackpanel so they won't cross.-->
         <StackPanel Orientation="Vertical">
