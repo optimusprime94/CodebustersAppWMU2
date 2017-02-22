@@ -98,6 +98,7 @@
     <Compile Include="Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\RequestHelper.cs" />
     <Compile Include="Services\TaskManagerHttpClient.cs" />
     <Compile Include="Models\AssignmentDto.cs" />
     <Compile Include="MainPage.xaml.cs">
