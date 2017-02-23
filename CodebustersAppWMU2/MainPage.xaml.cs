@@ -35,30 +35,21 @@ namespace CodebustersAppWMU2
 
         public async void Test(){
 
-            HttpClient client = TaskManagerHttpClient.GetClient();
-            
-            HttpResponseMessage response = await client.GetAsync("api/tasks");
+            RequestHelper client = new RequestHelper();
 
-            if (response.IsSuccessStatusCode)
-            {              
-                string content = await response.Content.ReadAsStringAsync();
-                var listTask = JsonConvert.DeserializeObject < IEnumerable <TaskDto>>(content);
+
+            var listTask = await client.GetRequest<TaskDto>("tasks");
+            
                 foreach (var item in listTask)
                 {
                     if (item != null)
                     {
                         Tasklist.Items.Add(item);
-                        
-
 
                         Tasklist.ItemClick += Tasklist_ItemClick;
                     }
                 }
             }
-
-
-           
-        }
 
         private void Tasklist_ItemClick(object sender, ItemClickEventArgs e)
         {

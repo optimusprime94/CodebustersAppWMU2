@@ -12,20 +12,33 @@ namespace CodebustersAppWMU2.Services
 {
     class RequestHelper
     {
-        public IEnumerable<Type> Type { get; set; }
-        public async void GetRequest(string requestTo)
+        /*
+         * Hopefully this code works
+         * 
+         */
+        public async Task<IEnumerable<T>> GetRequest<T>(string requestTo)
         {
-
-            HttpClient client = TaskManagerHttpClient.GetClient();
-
-            HttpResponseMessage response = await client.GetAsync("api/" + requestTo);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string content = await response.Content.ReadAsStringAsync();
-                var elements = JsonConvert.DeserializeObject<IEnumerable<TaskDto>>(content);
+                HttpClient client = TaskManagerHttpClient.GetClient();
+
+                HttpResponseMessage response = await client.GetAsync("api/" + requestTo);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var jsonContent = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                    return jsonContent;
+                }
+                else
+                {
+                    return null;
+                }
             }
- 
+            catch
+            {
+                return null;
+            }
 
 
         }
