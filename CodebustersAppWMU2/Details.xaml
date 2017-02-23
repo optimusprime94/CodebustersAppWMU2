@@ -22,6 +22,7 @@
         <TextBlock x:Name="Description" HorizontalAlignment="Left" Margin="10,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="205" Width="340" Foreground="White" FontSize="22"/>
         <TextBlock x:Name="Startdate" HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.425,-1.567" Width="170" Foreground="White" FontSize="22"/>
         <TextBlock x:Name="Deadline" HorizontalAlignment="Left" Margin="180,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Foreground="White" FontSize="22" TextAlignment="Right"/>
+        <TextBlock x:Name="Owner" HorizontalAlignment="Left" Margin="10,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="22" TextAlignment="Right"/>
 
     </Grid>
 </Page>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CodebustersAppWMU2.Models;
+using CodebustersAppWMU2.Services;
 
 namespace CodebustersAppWMU2
 {
@@ -28,6 +29,7 @@ namespace CodebustersAppWMU2
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             /* We pass the task we clicked on to this action, then we check if the
              * the parameter passed is null, if not we pass the values to the UI. */
             if (e.Parameter != null)
@@ -36,23 +38,44 @@ namespace CodebustersAppWMU2
 
                 TaskDetail.Text = task.Title;
                 Description.Text = task.Requirements;
-                Startdate.Text = task.BeginDateTime.Substring(0,10);
+                Startdate.Text = task.BeginDateTime.Substring(0, 10);
                 Deadline.Text = task.DeadlineDateTime.Substring(0, 10);
+                RequestTest(task);
             }
             base.OnNavigatedTo(e);
         }
+        public async void RequestTest(TaskDto task)
+        {
+            RequestHelper client = new RequestHelper();
+            string assignment = "assignments", user = "users";
+            var listassignment = await client.GetRequest<AssignmentDto>(assignment);
+            var listuser = await client.GetRequest<UserDto>(user);
+            foreach (var item in listassignment)
+            {
+                foreach (var items in listuser)
+                {
+                    if (task.TaskId == item.TaskId)
+                    {
+                        if (item.UserId == items.UserId)
+                        {
+                            string name;
+                            name = "" + items.FirstName.ToString() + items.LastName.ToString();
+                            Owner.Text = name;
+                            //Owner.Text = items.FirstName.ToString();
+                           
 
+                        }
+                    }
+                }
+            }
 
-        //void HardwareButtons_BackPressed(object sender,
-        //  Windows.Phone.UI.Input.BackPressedEventArgs e)
-        //{
-        //    if (this.Frame != null && this.Frame.CanGoBack)
-        //    {
-        //        e.Handled = true;
-        //        this.Frame.GoBack();
-        //    }
-        //}
+            //if (listuser != null)
+            //{
+            //    var test = listuser.First(B => listassignment.Equals(B.UserId));
 
-
+            //    Owner.Text = test.ToString();
+            //}
+        }
     }
 }
+
