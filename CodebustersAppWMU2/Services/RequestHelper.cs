@@ -41,6 +41,32 @@ namespace CodebustersAppWMU2.Services
             {
                 return null;
             }
+        }
+        /*
+         * This method is similar to the above method, except that it is used to delete an object
+         * of a specific type. the string parameter should be something like "{controller}/{id}"
+         */
+        public async Task<string> DeleteRequest<T>(string request, T obj)
+        {
+            try
+            {
+                HttpClient client = TaskManagerHttpClient.GetClient();
+
+                HttpResponseMessage response = await client.DeleteAsync("api/" + request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return "Deleted";
+                }
+                else
+                {
+                    return "Request failed";
+                }
+            }
+            catch
+            {
+                return "Request failed";
+            }
 
         }
     }
