@@ -21,8 +21,30 @@
                    Height="49" Width="340" FontSize="36" Foreground="#FFD53939" FontWeight="Bold"/>
         <TextBlock x:Name="Description" HorizontalAlignment="Left" Margin="10,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="205" Width="340" Foreground="White" FontSize="22"/>
         <TextBlock x:Name="Startdate" HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.425,-1.567" Width="170" Foreground="White" FontSize="22"/>
-        <TextBlock x:Name="Deadline" HorizontalAlignment="Left" Margin="180,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Foreground="White" FontSize="22" TextAlignment="Right"/>
-        <TextBlock x:Name="Owner" HorizontalAlignment="Left" Margin="10,365,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Foreground="White" FontSize="22" TextAlignment="Right"/>
+        <TextBlock x:Name="Deadline" 
+                   HorizontalAlignment="Left" 
+                   Margin="180,165,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="" 
+                   VerticalAlignment="Top" 
+                   Width="170" 
+                   Foreground="White" 
+                   FontSize="22" 
+                   TextAlignment="Right"/>
+        <TextBlock x:Name="Owner" 
+                   HorizontalAlignment="Left" 
+                   Margin="10,480,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="" VerticalAlignment="Top" 
+                   Width="340" 
+                   Foreground="White" 
+                   FontSize="22" 
+                   TextAlignment="Right" Height="150"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,455,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="22">
+            <Run Foreground="#FFD53939" Text="Assigned"/>
+            <Run Foreground="#FFD53939" Text=":"/>
+        </TextBlock>
+
 
     </Grid>
 </Page>

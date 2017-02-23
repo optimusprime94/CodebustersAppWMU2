@@ -47,7 +47,7 @@ namespace CodebustersAppWMU2
         public async void RequestTest(TaskDto task)
         {
             RequestHelper client = new RequestHelper();
-            string assignment = "assignments", user = "users";
+            string assignment = "assignments", user = "users", name = "";
             var listassignment = await client.GetRequest<AssignmentDto>(assignment);
             var listuser = await client.GetRequest<UserDto>(user);
             foreach (var item in listassignment)
@@ -58,17 +58,14 @@ namespace CodebustersAppWMU2
                     {
                         if (item.UserId == items.UserId)
                         {
-                            string name;
-                            name = "" + items.FirstName.ToString() + items.LastName.ToString();
-                            Owner.Text = name;
-                            //Owner.Text = items.FirstName.ToString();
-                           
+
+                            name = String.Concat(name, items.FirstName + " " + items.LastName + ", ");
 
                         }
                     }
                 }
             }
-
+            Owner.Text = name;
             //if (listuser != null)
             //{
             //    var test = listuser.First(B => listassignment.Equals(B.UserId));
