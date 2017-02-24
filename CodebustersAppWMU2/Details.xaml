@@ -53,8 +53,8 @@
         <TextBlock x:Name="DescriptionBlock" HorizontalAlignment="Left" Margin="10,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.473,0.5">
             <Run Foreground="#FFD53939" FontSize="18" Text="Description"/>
         </TextBlock>
-        <Button x:Name="button" Content="Assign" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="button_Click" Background="#4C109A42"/>
-        <Button x:Name="button_Copy" Content="Remove" HorizontalAlignment="Left" Margin="100,190,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#4CE81D1D"/>
+        <Button x:Name="AssignBtn" Content="Assign" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="AssignBtn_OnClick_Click" Background="#4C109A42"/>
+        <Button x:Name="RemoveBtn" Content="Remove" HorizontalAlignment="Left" Margin="100,190,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#4CE81D1D" Click="RemoveBtn_Click"/>
 
 
     </Grid>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,6 +24,7 @@ namespace CodebustersAppWMU2
     public sealed partial class Details : Page
     {
         RequestHelper client = new RequestHelper();
+        private TaskDto _detailsTask;
         public Details()
         {
             
@@ -38,6 +40,7 @@ namespace CodebustersAppWMU2
             if (e.Parameter != null)
             {
                 TaskDto task = (TaskDto)e.Parameter;
+                _detailsTask = task;
 
                 TaskDetail.Text = task.Title;
                 Description.Text = task.Requirements;
@@ -94,10 +97,32 @@ namespace CodebustersAppWMU2
 
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private async void HandleAssignments()
         {
-            UserDto item = (UserDto)this.AssingmentBox.SelectedItem;
+            UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
+            var assignmentToHandle = new AssignmentDto()
+            {
+                TaskId = _detailsTask.TaskId,
+                UserId = user.UserId
+            };
+           // var status = await client.AssignRequest<AssignmentDto>("assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle); // delete
+            var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+            // Create a MessageDialog
+            var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
+
+            // Show dialog and save result
+            var result = dialog.ShowAsync();
+        }
+
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AssignBtn_OnClick_Click(object sender, RoutedEventArgs e)
+        {
+            HandleAssignments();
         }
     }
 }

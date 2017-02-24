@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -57,6 +58,34 @@ namespace CodebustersAppWMU2.Services
                 if (response.IsSuccessStatusCode)
                 {
                     return "Deleted";
+                }
+                else
+                {
+                    return "Request failed";
+                }
+            }
+            catch
+            {
+                return "Request failed";
+            }
+
+        }
+
+        /*
+ * This method is similar to the above method, except that it is used to delete an object
+ * of a specific type. the string parameter should be something like "{controller}/{id}"
+ */
+        public async Task<string> AssignRequest<T>(string request, T obj)
+        {
+            try
+            {
+                HttpClient client = TaskManagerHttpClient.GetClient();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(obj));
+                HttpResponseMessage response = await client.PostAsync("api/" + request, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return "Added";
                 }
                 else
                 {
