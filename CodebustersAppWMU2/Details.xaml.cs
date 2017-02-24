@@ -22,9 +22,12 @@ namespace CodebustersAppWMU2
     /// </summary>
     public sealed partial class Details : Page
     {
+        RequestHelper client = new RequestHelper();
         public Details()
         {
+            
             this.InitializeComponent();
+            ComboBoxSeed();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -46,7 +49,7 @@ namespace CodebustersAppWMU2
         }
         public async void RequestTest(TaskDto task)
         {
-            RequestHelper client = new RequestHelper();
+            
             string assignment = "assignments", user = "users", name = "";
             var listassignment = await client.GetRequest<AssignmentDto>(assignment);
             var listuser = await client.GetRequest<UserDto>(user);
@@ -72,6 +75,18 @@ namespace CodebustersAppWMU2
 
             //    Owner.Text = test.ToString();
             //}
+        }
+
+        private async void ComboBoxSeed()
+        {
+            var users = await client.GetRequest<UserDto>("users");
+
+            foreach (var user in users)
+            {
+                AssingmentBox.Items.Add(user);
+            }
+            
+
         }
     }
 }

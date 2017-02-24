@@ -44,7 +44,13 @@
             <Run Foreground="#FFD53939" FontSize="18" Text="Assigned"/>
             <Run Foreground="#FFD53939" Text=":"/>
         </TextBlock>
-        <ComboBox x:Name="AssingmentBox" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Width="340"/>
+        <ComboBox x:Name="AssingmentBox" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Width="340">
+        <ComboBox.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding FirstName}"/>
+            </DataTemplate>
+        </ComboBox.ItemTemplate>
+        </ComboBox>
         <TextBlock x:Name="DescriptionBlock" HorizontalAlignment="Left" Margin="10,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.473,0.5">
             <Run Foreground="#FFD53939" FontSize="18" Text="Description"/>
         </TextBlock>
