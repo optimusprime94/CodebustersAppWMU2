@@ -106,8 +106,8 @@ namespace CodebustersAppWMU2
                 TaskId = _detailsTask.TaskId,
                 UserId = user.UserId
             };
-           // var status = await client.AssignRequest<AssignmentDto>("assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle); // delete
-            var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+           var status = await client.DeleteRequest<AssignmentDto>("assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle); // delete
+           // var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
             // Create a MessageDialog
             var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
 
@@ -117,12 +117,12 @@ namespace CodebustersAppWMU2
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            HandleAssignments();
         }
 
         private void AssignBtn_OnClick_Click(object sender, RoutedEventArgs e)
         {
-            HandleAssignments();
+       
         }
     }
 }
