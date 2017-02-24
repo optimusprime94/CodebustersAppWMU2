@@ -88,6 +88,17 @@ namespace CodebustersAppWMU2
             
 
         }
+
+        private void AssingmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            UserDto item = (UserDto)this.AssingmentBox.SelectedItem;
+
+        }
     }
 }
 
