@@ -42,6 +42,16 @@
                            FontSize="16"
                            Foreground="DarkGray" 
                            Opacity="0.8" />
+                            <TextBlock Text="{Binding BeginDateTime}" 
+                           Margin="20,0,20,8"
+                           FontSize="16"
+                           Foreground="DarkGray" 
+                           Opacity="0.8" />
+                            <TextBlock Text="{Binding DeadlineDateTime}" 
+                           Margin="20,0,20,8"
+                           FontSize="16"
+                           Foreground="DarkGray" 
+                           Opacity="0.8" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
