@@ -134,7 +134,9 @@ namespace CodebustersAppWMU2
                 e.Handled = true;
                 int x = rootFrame.BackStackDepth;
                 for(int i = 0; i < x; i++)
-                rootFrame.GoBack();
+                {
+                    rootFrame.GoBack();
+                }
             }
         }
     }
