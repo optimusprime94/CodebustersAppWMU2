@@ -132,6 +132,8 @@ namespace CodebustersAppWMU2
             if (rootFrame.CanGoBack)
             {
                 e.Handled = true;
+                int x = rootFrame.BackStackDepth;
+                for(int i = 0; i < x; i++)
                 rootFrame.GoBack();
             }
         }
