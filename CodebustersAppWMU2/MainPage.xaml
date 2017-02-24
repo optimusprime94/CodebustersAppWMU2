@@ -13,6 +13,7 @@
             <ImageBrush ImageSource="Assets/bgimage1.jpg"
                     Stretch="UniformToFill" />
         </Grid.Background>
+        <ScrollViewer>
         <!--surround the textblock and the listview in a 
         stackpanel so they won't cross.-->
         <StackPanel Orientation="Vertical">
@@ -57,5 +58,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
