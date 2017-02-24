@@ -41,8 +41,9 @@
                                FontSize="24" 
                                FontWeight="SemiBold"
                                Foreground="White" />
+                                
                                 <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Requirements}" 
+                                <TextBlock Text="{Binding Assigned}" 
                                Margin="20,0,20,8"
                                FontSize="16"
                                Foreground="DarkGray" 

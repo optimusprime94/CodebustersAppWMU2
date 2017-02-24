@@ -34,12 +34,12 @@ namespace CodebustersAppWMU2.Services
                 }
                 else
                 {
-                    return null;
+                    return new List<T>();
                 }
             }
             catch
             {
-                return null;
+                return new List<T>();
             }
         }
         /*

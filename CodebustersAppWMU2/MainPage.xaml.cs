@@ -36,18 +36,29 @@ namespace CodebustersAppWMU2
         public async void Test(){
 
             RequestHelper client = new RequestHelper();
-
+            string assigned;
 
             var listTask = await client.GetRequest<TaskDto>("tasks");
             
                 foreach (var item in listTask)
                 {
-                    if (item != null)
+                //var assignment = await client.GetRequest<TaskDto>("assignments/" + item.TaskId);
+
+                //    var task = new TaskResponsibility()
+                //    {
+                //        Task = item
+                //    };
+                //if (assignment.Any())
+                //{
+                //    task.Assigned = "Assigned";
+                //}
+
+                if (item != null)
                     {
                         Tasklist.Items.Add(item);
-
                         Tasklist.ItemClick += Tasklist_ItemClick;
                     }
+                    
                 }
             }
 
