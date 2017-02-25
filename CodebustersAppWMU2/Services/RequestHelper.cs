@@ -80,9 +80,8 @@ namespace CodebustersAppWMU2.Services
             try
             {
                 HttpClient client = TaskManagerHttpClient.GetClient();
-                StringContent content = new StringContent(JsonConvert.SerializeObject(obj));
+                StringContent content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("api/" + request, content);
-
                 if (response.IsSuccessStatusCode)
                 {
                     return "Added";

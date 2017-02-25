@@ -83,7 +83,22 @@ namespace CodebustersAppWMU2
                 AssingmentBox.Items.Add(user);
             }
         }
-        private async void Resign()
+        private async void Resign(AssignmentDto assignmentToHandle)
+        {
+
+            var status =
+                await client.DeleteRequest<AssignmentDto>(
+                    "assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle);
+
+            // Create a MessageDialog
+            var dialog = new MessageDialog(status, "Request");
+
+            // Show dialog and save result
+            var result = dialog.ShowAsync();
+        }
+
+
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
             UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
@@ -92,40 +107,26 @@ namespace CodebustersAppWMU2
                 TaskId = _detailsTask.TaskId,
                 UserId = user.UserId
             };
+            // Use FirstOrDefault instead of First, because then we get an null if the list is empty
+            // instead of an exception.
+            var value = _thisTaskAssignments.FirstOrDefault(a => a.UserId == user.UserId);
 
-            if (!_thisTaskAssignments.Contains(assignmentToHandle))
+            // We don't do anything if the assignment doesn't exist.
+            if (value == null)
             {
                 return;
             }
-
-
-            var status =
-                    await client.DeleteRequest<AssignmentDto>(
-                        "assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle);
-
-            // Create a MessageDialog
-            var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
-
-            // Show dialog and save result
-            var result = dialog.ShowAsync();
-
-        }
-
-        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Resign();
-            // this.Frame.Navigate(typeof(Details));
-            RequestTest(_detailsTask);
-            //this.Frame.UpdateLayout();
+            else
+            {
+                Resign(assignmentToHandle);
+                // this.Frame.Navigate(typeof(Details));
+                RequestTest(_detailsTask);
+                // this.Frame.UpdateLayout();
+            }
         }
 
         private void AssignBtn_OnClick_Click(object sender, RoutedEventArgs e)
         {
-            Assign();
-        }
-
-        private async void Assign()
-        {
             UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
             var assignmentToHandle = new AssignmentDto()
@@ -134,20 +135,30 @@ namespace CodebustersAppWMU2
                 UserId = user.UserId
             };
 
-            if (_thisTaskAssignments.Contains(assignmentToHandle))
+            var value = _thisTaskAssignments.FirstOrDefault(a => a.UserId == user.UserId);
+
+            // If the assignment already exists, we don't do anything.
+            if (value != null)
             {
                 return;
             }
+            else
+            {
+                Assign(assignmentToHandle);
+            }
+        }
+
+        private async void Assign(AssignmentDto assignmentToHandle)
+        {
 
 
+                var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+                // Create a MessageDialog
+                var dialog = new MessageDialog(status, "Request");
 
-            var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
-            // Create a MessageDialog
-            var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
-
-            // Show dialog and save result
-            var result = dialog.ShowAsync();
-
+                // Show dialog and save result
+                var result = dialog.ShowAsync();
+            
         }
 
     }
