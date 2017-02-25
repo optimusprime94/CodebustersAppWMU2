@@ -24,17 +24,17 @@ namespace CodebustersAppWMU2
     public sealed partial class Details : Page
     {
         RequestHelper client = new RequestHelper();
+        private IEnumerable<AssignmentDto> _thisTaskAssignments;
         private TaskDto _detailsTask;
         public Details()
         {
-            
+
             this.InitializeComponent();
             ComboBoxSeed();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
             /* We pass the task we clicked on to this action, then we check if the
              * the parameter passed is null, if not we pass the values to the UI. */
             if (e.Parameter != null)
@@ -52,11 +52,11 @@ namespace CodebustersAppWMU2
         }
         public async void RequestTest(TaskDto task)
         {
-            
+
             string assignment = "assignments", user = "users", name = "";
-            var listassignment = await client.GetRequest<AssignmentDto>(assignment);
+            _thisTaskAssignments = await client.GetRequest<AssignmentDto>(assignment);
             var listuser = await client.GetRequest<UserDto>(user);
-            foreach (var item in listassignment)
+            foreach (var item in _thisTaskAssignments)
             {
                 foreach (var items in listuser)
                 {
@@ -72,12 +72,6 @@ namespace CodebustersAppWMU2
                 }
             }
             Owner.Text = name;
-            //if (listuser != null)
-            //{
-            //    var test = listuser.First(B => listassignment.Equals(B.UserId));
-
-            //    Owner.Text = test.ToString();
-            //}
         }
 
         private async void ComboBoxSeed()
@@ -88,16 +82,8 @@ namespace CodebustersAppWMU2
             {
                 AssingmentBox.Items.Add(user);
             }
-            
-
         }
-
-        private void AssingmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private async void HandleAssignments()
+        private async void Resign()
         {
             UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
@@ -106,24 +92,64 @@ namespace CodebustersAppWMU2
                 TaskId = _detailsTask.TaskId,
                 UserId = user.UserId
             };
-           var status = await client.DeleteRequest<AssignmentDto>("assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle); // delete
-           // var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+
+            if (!_thisTaskAssignments.Contains(assignmentToHandle))
+            {
+                return;
+            }
+
+
+            var status =
+                    await client.DeleteRequest<AssignmentDto>(
+                        "assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle);
+
             // Create a MessageDialog
             var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
 
             // Show dialog and save result
             var result = dialog.ShowAsync();
+
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            HandleAssignments();
+            Resign();
+            // this.Frame.Navigate(typeof(Details));
+            RequestTest(_detailsTask);
+            //this.Frame.UpdateLayout();
         }
 
         private void AssignBtn_OnClick_Click(object sender, RoutedEventArgs e)
         {
-       
+            Assign();
         }
+
+        private async void Assign()
+        {
+            UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
+
+            var assignmentToHandle = new AssignmentDto()
+            {
+                TaskId = _detailsTask.TaskId,
+                UserId = user.UserId
+            };
+
+            if (_thisTaskAssignments.Contains(assignmentToHandle))
+            {
+                return;
+            }
+
+
+
+            var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+            // Create a MessageDialog
+            var dialog = new MessageDialog(user.FirstName + " " + user.LastName + status, "Request");
+
+            // Show dialog and save result
+            var result = dialog.ShowAsync();
+
+        }
+
     }
 }
 

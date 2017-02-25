@@ -13,8 +13,7 @@
             <ImageBrush ImageSource="Assets/bgimage1.jpg"
                     Stretch="UniformToFill" />
         </Grid.Background>
-        <ScrollViewer ViewChanged="ScrollViewer_ViewChanged"
-                    VerticalScrollMode="Auto"
+        <ScrollViewer VerticalScrollMode="Auto"
                     VerticalScrollBarVisibility="Auto"
                     HorizontalScrollMode="Auto"
                     HorizontalScrollBarVisibility="Auto">
