@@ -43,8 +43,8 @@ namespace CodebustersAppWMU2
 
                 TaskDetail.Text = _detailsTask.Title;
                 Description.Text = _detailsTask.Requirements;
-                Startdate.Text = _detailsTask.BeginDateTime.Substring(0, 10);
-                Deadline.Text = _detailsTask.DeadlineDateTime.Substring(0, 10);
+                Startdate.Text = _detailsTask.BeginDateTime;
+                Deadline.Text = _detailsTask.DeadlineDateTime;
                 GetResponsible(_detailsTask);
             }
             base.OnNavigatedTo(e);
@@ -55,9 +55,10 @@ namespace CodebustersAppWMU2
             string assignment = "assignments/", user = "users", name = "";
             _thisTaskAssignments = await _client.GetRequest<AssignmentDto>(assignment + _detailsTask.TaskId);
             var listuser = await _client.GetRequest<UserDto>(user);
+            var userDtos = listuser as IList<UserDto> ?? listuser.ToList();
             foreach (var item in _thisTaskAssignments)
             {
-                foreach (var items in listuser)
+                foreach (var items in userDtos)
                 {
                     if (task.TaskId == item.TaskId)
                     {

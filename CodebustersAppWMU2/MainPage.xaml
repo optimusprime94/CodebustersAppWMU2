@@ -36,31 +36,37 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
-                                
+                                <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Title}" 
                                Margin="20,0,20,8"
                                FontSize="24" 
                                FontWeight="SemiBold"
                                Foreground="White" />
                                 
-                                <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Assigned}" 
+                        
+                               <TextBlock Text="{Binding BeginDateTime}" 
                                Margin="20,0,20,8"
                                FontSize="16"
                                Foreground="DarkGray" 
-                               Opacity="0.8" />
-                                
-                                    <TextBlock Text="{Binding BeginDateTime}" 
-                               Margin="20,0,20,8"
-                               FontSize="16"
-                               Foreground="DarkGray" 
-                               Opacity="0.8" />
+                               Opacity="0.8" 
+                                          HorizontalAlignment="Right"
+                               TextAlignment="Right"/>
                                 <TextBlock Text="{Binding DeadlineDateTime}" 
                                Margin="20,0,20,8"
                                FontSize="16"
                                Foreground="DarkGray" 
+                               Opacity="0.8" 
+                                           HorizontalAlignment="Right"
+                               TextAlignment="Right"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Assigned}" 
+                               Margin="20,0,20,8"
+                               FontSize="16"
+                               Foreground="DarkGray" 
                                Opacity="0.8" />
-                            </StackPanel>
+                                </StackPanel>
+                            
                             </StackPanel>
 
 

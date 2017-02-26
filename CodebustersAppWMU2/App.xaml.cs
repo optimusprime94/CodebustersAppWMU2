@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using CodebustersAppWMU2.Models;
 
 namespace CodebustersAppWMU2
 {
@@ -23,7 +24,8 @@ namespace CodebustersAppWMU2
     /// </summary>
     sealed partial class App : Application
     {
-
+        public static IEnumerable<TaskDto> GlobalTaskDtos;
+        public static IEnumerable<AssignmentDto> GlobalAssignmentDtos;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
