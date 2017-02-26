@@ -23,7 +23,7 @@ namespace CodebustersAppWMU2
     /// </summary>
     public sealed partial class Details : Page
     {
-        RequestHelper client = new RequestHelper();
+        private readonly RequestHelper _client = new RequestHelper();
         private IEnumerable<AssignmentDto> _thisTaskAssignments;
         private TaskDto _detailsTask;
         public Details()
@@ -39,23 +39,22 @@ namespace CodebustersAppWMU2
              * the parameter passed is null, if not we pass the values to the UI. */
             if (e.Parameter != null)
             {
-                TaskDto task = (TaskDto)e.Parameter;
-                _detailsTask = task;
+                _detailsTask = (TaskDto)e.Parameter;
 
-                TaskDetail.Text = task.Title;
-                Description.Text = task.Requirements;
-                Startdate.Text = task.BeginDateTime.Substring(0, 10);
-                Deadline.Text = task.DeadlineDateTime.Substring(0, 10);
-                RequestTest(task);
+                TaskDetail.Text = _detailsTask.Title;
+                Description.Text = _detailsTask.Requirements;
+                Startdate.Text = _detailsTask.BeginDateTime.Substring(0, 10);
+                Deadline.Text = _detailsTask.DeadlineDateTime.Substring(0, 10);
+                GetResponsible(_detailsTask);
             }
             base.OnNavigatedTo(e);
         }
-        public async void RequestTest(TaskDto task)
+        public async void GetResponsible(TaskDto task)
         {
 
-            string assignment = "assignments", user = "users", name = "";
-            _thisTaskAssignments = await client.GetRequest<AssignmentDto>(assignment);
-            var listuser = await client.GetRequest<UserDto>(user);
+            string assignment = "assignments/", user = "users", name = "";
+            _thisTaskAssignments = await _client.GetRequest<AssignmentDto>(assignment + _detailsTask.TaskId);
+            var listuser = await _client.GetRequest<UserDto>(user);
             foreach (var item in _thisTaskAssignments)
             {
                 foreach (var items in listuser)
@@ -65,7 +64,7 @@ namespace CodebustersAppWMU2
                         if (item.UserId == items.UserId)
                         {
 
-                            name = String.Concat(name, items.FirstName + " " + items.LastName + ", ");
+                            name = String.Concat(name, items.FirstName + " " + items.LastName + "\n");
 
                         }
                     }
@@ -76,7 +75,7 @@ namespace CodebustersAppWMU2
 
         private async void ComboBoxSeed()
         {
-            var users = await client.GetRequest<UserDto>("users");
+            var users = await _client.GetRequest<UserDto>("users");
 
             foreach (var user in users)
             {
@@ -87,14 +86,10 @@ namespace CodebustersAppWMU2
         {
 
             var status =
-                await client.DeleteRequest<AssignmentDto>(
+                await _client.DeleteRequest<AssignmentDto>(
                     "assignments/" + assignmentToHandle.TaskId + "/" + assignmentToHandle.UserId, assignmentToHandle);
+            this.Frame.Navigate(typeof(Details), _detailsTask);
 
-            // Create a MessageDialog
-            var dialog = new MessageDialog(status, "Request");
-
-            // Show dialog and save result
-            var result = dialog.ShowAsync();
         }
 
 
@@ -102,12 +97,17 @@ namespace CodebustersAppWMU2
         {
             UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
+            if (user == null)
+            {
+                return;
+            }
+            // We create the assignment by combining the taskId and userId.
             var assignmentToHandle = new AssignmentDto()
             {
                 TaskId = _detailsTask.TaskId,
                 UserId = user.UserId
             };
-            // Use FirstOrDefault instead of First, because then we get an null if the list is empty
+            // Use FirstOrDefault instead of First, because then we get a null if the list is empty
             // instead of an exception.
             var value = _thisTaskAssignments.FirstOrDefault(a => a.UserId == user.UserId);
 
@@ -119,9 +119,6 @@ namespace CodebustersAppWMU2
             else
             {
                 Resign(assignmentToHandle);
-                // this.Frame.Navigate(typeof(Details));
-                RequestTest(_detailsTask);
-                // this.Frame.UpdateLayout();
             }
         }
 
@@ -129,6 +126,11 @@ namespace CodebustersAppWMU2
         {
             UserDto user = (UserDto)this.AssingmentBox.SelectedItem;
 
+            if (user == null)
+            {
+                return;
+            }
+            // We create the new assignment by combining the taskId and userId.
             var assignmentToHandle = new AssignmentDto()
             {
                 TaskId = _detailsTask.TaskId,
@@ -150,15 +152,10 @@ namespace CodebustersAppWMU2
 
         private async void Assign(AssignmentDto assignmentToHandle)
         {
-
-
-                var status = await client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
-                // Create a MessageDialog
-                var dialog = new MessageDialog(status, "Request");
-
-                // Show dialog and save result
-                var result = dialog.ShowAsync();
-            
+            // The await operator is applied to a task in an asynchronous method to suspend the execution 
+            // of the method until the awaited task completes.The task represents ongoing work.
+           var status = await _client.AssignRequest<AssignmentDto>("assignments/create", assignmentToHandle);
+           this.Frame.Navigate(typeof(Details), _detailsTask);
         }
 
     }
