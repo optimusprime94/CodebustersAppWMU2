@@ -1,5 +1,6 @@
 ﻿using CodebustersAppWMU2.Services;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using CodebustersAppWMU2.Models;
 
@@ -9,34 +10,23 @@ namespace CodebustersAppWMU2
     
     public sealed partial class MainPage : Page
     {
-      
+        private IEnumerable<TaskDto> _taskDtos;
         public MainPage()
         {
             this.InitializeComponent();
+             PopulateTasks();
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-             Test();
-            
         }
 
-        public async void Test(){
+        public async void PopulateTasks(){
 
             RequestHelper client = new RequestHelper();
-            //string assigned;
 
-            var listTask = await client.GetRequest<TaskDto>("tasks");
+            _taskDtos = await client.GetRequest<TaskDto>("tasks");
             
-                foreach (var item in listTask)
+                foreach (var item in _taskDtos)
                 {
-                //var assignment = await client.GetRequest<TaskDto>("assignments/" + item.TaskId);
-
-                //    var task = new TaskResponsibility()
-                //    {
-                //        Task = item
-                //    };
-                //if (assignment.Any())
-                //{
-                //    task.Assigned = "Assigned";
-                //}
 
                 if (item != null)
                     {

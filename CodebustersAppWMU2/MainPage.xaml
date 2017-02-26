@@ -62,7 +62,9 @@
                                Opacity="0.8" />
                             </StackPanel>
                             </StackPanel>
-                            
+
+
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
