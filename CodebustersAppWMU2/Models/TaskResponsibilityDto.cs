@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI;
 
 namespace CodebustersAppWMU2.Models
 {
@@ -19,6 +21,12 @@ namespace CodebustersAppWMU2.Models
         public string Requirements { get; set; }
 
         public String Assigned { get; set; } = "Not Assigned";
+
+        public Point From { get; set; }
+
+        public Point To { get; set; }
+
+        public string DurationColor { get; set; }
 
     }
 }

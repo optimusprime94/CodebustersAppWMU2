@@ -20,31 +20,49 @@
             <!--surround the textblock and the listview in a 
             stackpanel so they won't cross.-->
             <StackPanel Orientation="Vertical">
-                <TextBlock Name="title"
-                           Margin="0,10,0,30"
-                           Text="TASKS"
-                           HorizontalAlignment="Center"
+                <StackPanel Orientation="Horizontal" Background="#B2000000">
+                    <TextBlock Name="TaskTitle"
+                           Margin="20,10,20,30"
+                           Text="TASK"
+                           HorizontalAlignment="Left"
+                           FontSize="30"
+                           FontWeight="SemiBold"
+                           Foreground="White"
+                           Width="300">
+                        
+                </TextBlock>
+                    <TextBlock Name="DateTitle"
+                           Margin="20,10,20,30"
+                           Text="PERIOD"
+                           HorizontalAlignment="Left"
                            FontSize="30"
                            FontWeight="SemiBold"
                            Foreground="White">
-                </TextBlock>
-                <!--Makes the item clickable-->
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Height="20" />
+                        <!--Makes the item clickable-->
                 <ListView x:Name="Tasklist"
                           IsItemClickEnabled="True"
                           ItemClick="Tasklist_ItemClick">
                 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
+                            <StackPanel  Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Title}" 
                                Margin="20,0,20,8"
-                               FontSize="24" 
+                               FontSize="24"
+                               Width="300"
                                FontWeight="SemiBold"
                                Foreground="White" />
-                                
-                        
-                               <TextBlock Text="{Binding BeginDateTime}" 
+
+                               <Line X1="{Binding From.X}" Y1="{Binding From.Y}"
+                      X2="{Binding To.X}" Y2="{Binding To.Y}"
+                      Stroke="{Binding DurationColor}" StrokeThickness="30"/>
+
+
+                                    <TextBlock Text="{Binding BeginDateTime}" 
                                Margin="20,0,20,8"
                                FontSize="16"
                                Foreground="DarkGray" 
@@ -58,6 +76,7 @@
                                Opacity="0.8" 
                                            HorizontalAlignment="Right"
                                TextAlignment="Right"/>
+                                    
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Assigned}" 
